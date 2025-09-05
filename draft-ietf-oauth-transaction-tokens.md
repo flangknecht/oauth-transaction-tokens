@@ -338,7 +338,7 @@ JWT claims as well as defines new claims. These claims are described below:
 : REQUIRED The issued at time of the Txn-Token as defined in {{RFC7519}}
 
 `aud`:
-: REQUIRED This claim, defined in {{RFC7519}}, identifies the Trust Domain in which the Txn-Token is valid.  This identifier MUST uniquely identify the Trust Domain to prevent the Txn-Token from being accepted outside it's current Trust Domain.
+: REQUIRED This claim, defined in {{RFC7519}}, identifies the Trust Domain in which the Txn-Token is valid.  This identifier MUST uniquely identify the Trust Domain to prevent the Txn-Token from being accepted outside its current Trust Domain.
 
 `exp`:
 : REQUIRED Expiry time of the Txn-Token as defined in {{RFC7519}}
@@ -539,7 +539,7 @@ A successful response to a Txn-Token Request by a Transaction Token Service is c
 
 * The `token_type` value MUST be set to `N_A` per guidance in OAuth 2.0 Token Exchange {{RFC8693}}
 * The `access_token` value MUST be the Txn-Token JWT
-* The `issued_token_type` value MUST bet set to `urn:ietf:params:oauth:token-type:txn_token`
+* The `issued_token_type` value MUST be set to `urn:ietf:params:oauth:token-type:txn_token`
 
 The Txn-Token Response MUST NOT include the values `expires_in`, `refresh_token` and `scope`
 
@@ -633,9 +633,9 @@ The authorization model within a Trust Domain boundary is most often quite diffe
 A Txn-token typically represents the call-chain of workloads necessary to complete a logical function initiated by an external or internal workload. The `txn` claim in the Txn-token provides a unique identifier that when logged by the TTS and each subsequent workload can provide both discovery and auditability of successful and failed transactions. It is therefore strongly RECOMMENDED to use an identifier, unique within the Trust Domain, for the `txn` value.
 
 ## Transaction Token Service Discovery
-A workload may use various mechanisms to determine which Transaction Token Service to interact with. Workloads MUST retrieve configuration information from a trusted source to minimize the risk of a threat actor providing malicious configuration data that points to a Transaction Token Service under it's control. Such a service could be used to collect Access Tokens sent as part of the Transaction Token Request message.
+A workload may use various mechanisms to determine which Transaction Token Service to interact with. Workloads MUST retrieve configuration information from a trusted source to minimize the risk of a threat actor providing malicious configuration data that points to a Transaction Token Service under its control. Such a service could be used to collect Access Tokens sent as part of the Transaction Token Request message.
 
-To mitigate this risk, workloads SHOULD authenticate the service providing the configuration information and verify the integrity of the configuration information. This ensures that no unauthorized entity can insert or alter configuration data. The workload SHOULD use Transport Layer Security (TLS) to authenticate the endpoint and secure the communication channel. Additionally, application-layer signatures or message authentication codes MAY be used to detect any tampering with the configuration information.
+To mitigate this risk, workloads SHOULD authenticate the service providing the configuration information and verify the integrity of the configuration information. This ensures that no unauthorized entity can insert or alter configuration data. The workload SHOULD use Transport Layer Security (TLS) to authenticate the endpoint and to secure the communication channel. Additionally, application-layer signatures or message authentication codes MAY be used to detect any tampering with the configuration information.
 
 ## Workload Configuration Protection
 A workload may be configured to access more than one instance of a Transaction Token Service to ensure redundancy or reduce latency for transaction token requests. The workload configuration should be protected against unauthorized addition or removal of Transaction Token Service instances. An attacker may perform a denial of service attack or degrade the performance of a system by removing an instance of a Transaction Token Service from the workload configuration.
@@ -647,7 +647,7 @@ A workload may accidently send a transaction token request to a service that is 
 The Transaction Token Service may need to rotate signing keys. When doing so, it MAY adopt the key rotation practices in Section 10.1.1 of {{OpenIdConnect}}.
 
 ## Transaction Tokens Are Not Authentication Credentials
-A workload MUST NOT use a transaction token to authenticate itself to another workload, service or the transaction token service. Transaction tokens represents information relevant to authorization decisions and are not workload identity credentials. Authentication between the workload and the transaction token service is described in [Mutual Authentication of the Txn-Token Request]{Mutual-Authentication-of-the-Txn-Token-Request}. The mechanisms used by workloads to authenticate to other workloads, services or system components is out of scope of this speicification.
+A workload MUST NOT use a transaction token to authenticate itself to another workload, service or the transaction token service. Transaction tokens represents information relevant to authorization decisions and are not workload identity credentials. Authentication between the workload and the transaction token service is described in [Mutual Authentication of the Txn-Token Request]{Mutual-Authentication-of-the-Txn-Token-Request}. The mechanisms used by workloads to authenticate to other workloads, services or system components is out of scope of this specification.
 
 # Privacy Considerations {#Privacy}
 
